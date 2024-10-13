@@ -119,6 +119,13 @@ jobs:
           TARGETS: ${{ inputs.targets }}
           SAFE_DOMAIN: ${{ inputs.safe_domain }}
 
+      - name: Check for output files
+        run: |
+          if [ -z "$(ls -A node_modules/pake-cli/output/)" ]; then
+            echo "No output files found!"
+            exit 1
+          fi
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4  # 升级到v4
         with:
